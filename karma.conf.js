@@ -3,7 +3,7 @@
 'use strict';
 
 var baseConfig = {
-  frameworks: ['mocha'],
+  frameworks: ['mocha', 'host-environment'],
   reporters: ['verbose'],
 
   // We test against 600+ real-world APIs, each of which is a pretty large download.
@@ -112,7 +112,7 @@ function configureLocalBrowsers (config) {
     config.browsers = ['Firefox', 'Chrome'];
   }
   else if (isWindows) {
-    config.browsers = ['Firefox', 'Chrome', 'Safari', 'IE'];
+    config.browsers = ['Firefox', 'Chrome', 'Edge', 'IE'];
   }
 }
 
@@ -151,7 +151,7 @@ function configureSauceLabs (config) {
     },
     'IE-11': {
       base: 'SauceLabs',
-      platform: 'Windows 7',
+      platform: 'Windows 10',
       browserName: 'internet explorer'
     },
     'IE-Edge': {

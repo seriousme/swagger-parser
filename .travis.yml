@@ -12,11 +12,11 @@ addons:
 matrix:
   include:
     # Local Browsers
-    - node_js: 8
+    - node_js: 9
       env: KARMA=true KARMA_COVERAGE=true
 
     # Sauce Labs
-    - node_js: 8
+    - node_js: 9
       env: KARMA=true KARMA_SAUCE=true
 
     # Node
@@ -24,11 +24,25 @@ matrix:
     - node_js: 5
     - node_js: 6
     - node_js: 7
+    - node_js: 8
+    - node_js: 9
 
 before_script:
   # Setup a virtual display for browser testing
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
+
+script:
+  # Always make sure the code passes linting rules
+  - npm run lint
+
+  # Run Karma (browser tests) or Mocha (Node.js tests).
+  - if [[ $KARMA ]]; then
+      npm run browserify -- --test;
+      npm run karma;
+    else
+      npm run istanbul;
+    fi
 
 after_success:
   # concatenate all code-coverage data into a single file
