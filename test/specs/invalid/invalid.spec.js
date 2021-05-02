@@ -60,4 +60,14 @@ describe("Invalid APIs (can't be parsed)", () => {
       expect(err.message).to.equal('API version number must be a string (e.g. \"1.0.0\") not a number.');
     }
   });
+  it("invalid OpenApi version (3.2.0)", async () => {
+    try {
+      await SwaggerParser.dereference(path.rel("specs/invalid/newer-openapi-version.yaml"));
+      helper.shouldNotGetCalled();
+    }
+    catch (err) {
+      expect(err).to.be.an.instanceOf(SyntaxError);
+      expect(err.message).to.equal("Unsupported OpenAPI version: 3.2.0. Swagger Parser only supports versions 3.0.0, 3.0.1, 3.0.2, 3.0.3, 3.1.0");
+    }
+  });
 });

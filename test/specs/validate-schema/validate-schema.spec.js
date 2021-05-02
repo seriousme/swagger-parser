@@ -102,6 +102,17 @@ describe("Invalid APIs (Swagger 2.0 schema validation)", () => {
       valid: false,
       file: "oneof.yaml"
     },
+    {
+      name: 'Petstore 3.0 schema',
+      valid: true,
+      file: "petstore-v3.0.json"
+    },
+    {
+      name: 'Petstore 3.1 schema',
+      valid: true,
+      file: "petstore-v3.1.json"
+    },
+
   ];
 
   it('should pass validation if "options.validate.schema" is false', async () => {
